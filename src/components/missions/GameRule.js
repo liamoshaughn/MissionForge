@@ -50,13 +50,13 @@ export default function GameRule(props) {
   const handleSelection = (selection) => {
     if (selection.name === 'Maelstrom of Battle') {
       setMaelstrom(true);
-    }
-    else{
+    } else {
       const rulesArray = rule || [];
       rulesArray.push(selection);
       store.setRule(rulesArray);
     }
   };
+
 
   return (
     <div style={{ width: '100%', height: 'fit-content' }}>
@@ -66,12 +66,14 @@ export default function GameRule(props) {
         <>
           <Autocomplete data={deck.mission_rules} select={(selection) => handleSelection(selection)} />
           <Autocomplete data={deck.mission_rules} select={(selection) => handleSelection(selection)} />
+          <Autocomplete data={deck.mission_rules} select={(selection) => handleSelection(selection)} />
         </>
       ) : null}
+      {rule?.length >= 2 && <div><p>Maelstrom of Battle, extra rules have been drawn</p></div>}
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '30px' }}>
         {rule ? (
-          rule.map((mission, index) => {
-            return (
+          <>
+            {rule.map((mission, index) => (
               <div key={index} style={{ border: '1px solid white', padding: '20px', flex: '1' }}>
                 <h3>{mission.name}</h3>
                 <div style={{ fontSize: '12px' }}>
@@ -81,8 +83,8 @@ export default function GameRule(props) {
                   <p>{mission.rule}</p>
                 </div>
               </div>
-            );
-          })
+            ))}
+          </>
         ) : (
           <button onClick={() => determineRule()}>Draw Rule</button>
         )}

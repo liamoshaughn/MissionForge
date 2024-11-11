@@ -96,6 +96,7 @@ const handleDrawMission = () => {
             <div style={{ marginTop: '20px' }}>
               <button onClick={() => handleNext()}>Next Turn</button>
             </div>
+            <div><p>Make sure to score and discard secondaries before clicking next if they have been achieved</p></div>
           </div>
           <div style={{ width: '100%', maxWidth: '500px' }}>
             <div>
@@ -126,7 +127,7 @@ const handleDrawMission = () => {
               <h4>
                 <strong>Mission Rule</strong>
               </h4>
-              <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '30px' }}>
+              <div style={{ display: 'flex', flexDirection:"column", gap: '30px' }}>
                 {store.rule.map((mission, index) => {
                   return (
                     <div key={index} style={{ border: '1px solid white', padding: '20px', flex: '1' }}>

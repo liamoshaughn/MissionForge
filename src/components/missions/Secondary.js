@@ -26,8 +26,8 @@ export default function Secondary(props) {
   const handleNext = () => {
     if (type === 'tactical') {
       const remainingMissions = [
-        ...deck.secondary_missions.fixed.filter((mission) => !selectedMissions.includes(mission)),
-        ...deck.secondary_missions.tactical.filter((mission) => !selectedMissions.includes(mission)),
+        ...deck.secondary_missions.fixed,
+        ...deck.secondary_missions.tactical,
       ];
 
       // Shuffle the remaining missions
@@ -75,10 +75,11 @@ export default function Secondary(props) {
         </div>
       )}
       {type === 'tactical' && (
-        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-          {deck.secondary_missions.tactical.map((mission, index) => (
-            <MissionCard toggleSelection={()=>toggleSelection(mission)} selectedMissions={selectedMissions} mission={mission} key={index}/>
-          ))}
+        <div style={{ display: 'flex', gap: '20px', flexDirection:"column" }}>
+          By clicking next you confirm that you are using Tactical Missions
+          <div>
+            <button onClick={handleNext}>Next</button>
+          </div>
         </div>
       )}
     </div>
