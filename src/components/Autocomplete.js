@@ -40,7 +40,7 @@ const Autocomplete = ({ data, select }) => {
       />
       <div  style={{background:"grey", paddingLeft:0}}>
         {suggestions.map((suggestion, index) => (
-          <div  key={index} onClick={() => handleSuggestionClick(suggestion) } onMouseEnter={()=>setHover(index)} onMouseLeave={()=>setHover()} style={{background: hover == index && "blue", height:"40px", cursor:"pointer", display:"flex", alignItems:"center"}}>
+          <div  key={index} onClick={() => handleSuggestionClick(suggestion) } onMouseEnter={()=>setHover(index)} onMouseLeave={()=>setHover()} style={{background: hover === index && "blue", height:"40px", cursor:"pointer", display:"flex", alignItems:"center"}}>
             {suggestion.name}
           </div>
         ))}

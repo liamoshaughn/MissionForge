@@ -1,5 +1,5 @@
 import { useStore } from '../store/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import MissionCard from './MissionCard';
 import Gambit from './missions/Gambit';
 
@@ -24,7 +24,7 @@ export default function Battle() {
 
   const handleNext = () => {
 
-    if (turn == 2) {
+    if (turn === 2) {
       setGambitTime(true);
     }
     const maxPrimaryScore = 50;
@@ -44,8 +44,7 @@ export default function Battle() {
     handleDrawMission();
   };
 
-  console.log(store);
-  const handleDrawMission = () => {
+  const handleDrawMission = useCallback(() => {
     const hasTargetsOfOpportunity = store.rule.some((rule) => rule.name === 'Targets of Opportunity');
 
     const maxHandSize = hasTargetsOfOpportunity ? 3 : 2;
@@ -62,11 +61,11 @@ export default function Battle() {
       store.setDeck(deck); // Assuming you have a setDeck function in your store
       store.setSecondary([...secondary, ...drawnMissions]);
     }
-  };
+  }, [deck, secondary, store]);
 
   useEffect(() => {
     handleDrawMission();
-  }, []);
+  }, [handleDrawMission]);
 
   return (
     <div style={{ width: '100vw', height: 'fit-content' }}>
@@ -105,7 +104,7 @@ export default function Battle() {
               <div>
                 <h3>Primary Score</h3>
                 <input
-                  disabled={gambit && gambit?.name != 'Proceed as Planned' ? true : false}
+                  disabled={gambit && gambit?.name !== 'Proceed as Planned' ? true : false}
                   value={currentPrimary}
                   onChange={(e) => setCurrentPrimary(e.target.value)}
                 />
@@ -123,7 +122,7 @@ export default function Battle() {
             </div>
             <div style={{ width: '100%', maxWidth: '500px' }}>
               <div>
-                {gambit && gambit.name != 'Proceed as Planned' ? (
+                {gambit && gambit.name !== 'Proceed as Planned' ? (
                   <>
                     <h4>
                       If Gambit successful add this to your score: <b> {Math.min(30, 50 - primaryScore)} VP</b>

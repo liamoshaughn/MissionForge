@@ -21,7 +21,7 @@ export default function MissionCard(props) {
       >
         <h5>{mission.name}</h5>
         <p style={{ fontSize: '10px', paddingBottom:"20px" }}>{mission.mission}</p>
-        {props.handleDiscard && (store.mode != "fixed" || props?.index == 2) && <button style={{position:"absolute", bottom:"10px"}} onClick={() => props.handleDiscard(mission)}>discard</button>}
+        {props.handleDiscard && (store.mode !== "fixed" || props?.index === 2) && <button style={{position:"absolute", bottom:"10px"}} onClick={() => props.handleDiscard(mission)}>discard</button>}
       </div>
     );
   }

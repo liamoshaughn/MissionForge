@@ -51,11 +51,11 @@ export default function Secondary(props) {
 
   useEffect(() => {
     store.setMode(type);
-  }, [type]);
+  }, [type, store]);
 
   useEffect(() => {
     store.setSecondary(selectedMissions);
-  }, [selectedMissions]);
+  }, [selectedMissions, store]);
 
 
 
