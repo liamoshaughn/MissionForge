@@ -238,10 +238,10 @@
     ]
   },
   "deployments":[
-    {"name":"Crucible of Battle", "image":"images/crucible.png"},
-    {"name":"Dawn of War", "image":"images/dawn.png"},
-    {"name":"Hammer and Anvil", "image":"images/hammer.png"},
-    {"name":"Search and Destroy", "image":"images/search.png"},
-    {"name":"Sweeping Engagement", "image":"images/sweeping.png"}
+    {"name":"Crucible of Battle", "image":"images/crucible.jpg"},
+    {"name":"Dawn of War", "image":"images/dawn.jpg"},
+    {"name":"Hammer and Anvil", "image":"images/hammer.jpg"},
+    {"name":"Search and Destroy", "image":"images/search.jpg"},
+    {"name":"Sweeping Engagement", "image":"images/sweeping.jpg"}
   ]
 }

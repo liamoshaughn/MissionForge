@@ -15,12 +15,16 @@ export default function Battle(props) {
   const [currentPrimary, setCurrentPrimary] = useState(0);
   const [currentSecondary, setCurrentSecondary] = useState(0);
   const [gambitTime, setGambitTime] = useState(false);
+  const [endGame, setEndGame] = useState(false);
 
   const handleDiscard = (discard) => {
     store.setSecondary(secondary.filter((mission) => mission !== discard));
   };
 
   const handleNext = () => {
+    if (turn == 5) {
+      setEndGame(true)
+    }
     if (turn == 2) {
       setGambitTime(true);
     }
@@ -31,45 +35,44 @@ export default function Battle(props) {
 
     store.setPrimaryScore(Math.min(newPrimaryScore, maxPrimaryScore));
     setCurrentPrimary(0);
-    
+
     store.setSecondaryScore(Math.min(newSecondaryScore, maxSecondaryScore));
     setCurrentSecondary(0);
-    
+
     store.setTurn();
     handleDrawMission();
   };
 
-  console.log(store); 
-const handleDrawMission = () => {
-    const hasTargetsOfOpportunity = store.rule.some(rule => rule.name === "Targets of Opportunity");
+  console.log(store);
+  const handleDrawMission = () => {
+    const hasTargetsOfOpportunity = store.rule.some((rule) => rule.name === 'Targets of Opportunity');
 
     const maxHandSize = hasTargetsOfOpportunity ? 3 : 2;
 
     if (deck.length > 0 && secondary.length < maxHandSize) {
-        const remainingCardsToDraw = maxHandSize - secondary.length;
-        const drawnMissions = [];
+      const remainingCardsToDraw = maxHandSize - secondary.length;
+      const drawnMissions = [];
 
-        for (let i = 0; i < remainingCardsToDraw; i++) {
-            const drawnMission = deck.pop();
-            drawnMissions.push(drawnMission);
-        }
+      for (let i = 0; i < remainingCardsToDraw; i++) {
+        const drawnMission = deck.pop();
+        drawnMissions.push(drawnMission);
+      }
 
-        store.setDeck(deck); // Assuming you have a setDeck function in your store
-        store.setSecondary([...secondary, ...drawnMissions]);
+      store.setDeck(deck); // Assuming you have a setDeck function in your store
+      store.setSecondary([...secondary, ...drawnMissions]);
     }
-};
+  };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     handleDrawMission();
-  },[])
+  }, []);
 
   return (
     <div style={{ width: '100vw', height: 'fit-content' }}>
       {gambitTime && !gambit ? (
         <Gambit />
       ) : (
-        <div style={{ display: 'flex', gap: '3%', flexWrap:"wrap" }}>
+        <div style={{ display: 'flex', gap: '3%', flexWrap: 'wrap' }}>
           <div style={{ width: '100%', maxWidth: '500px' }}>
             <h2>Battle - Turn {turn + 1}</h2>
             <h3>Current Missions</h3>
@@ -96,12 +99,17 @@ const handleDrawMission = () => {
             <div style={{ marginTop: '20px' }}>
               <button onClick={() => handleNext()}>Next Turn</button>
             </div>
-            <div><p>Make sure to score and discard secondaries before clicking next if they have been achieved</p></div>
+            <div>
+              <p>Make sure to score and discard secondaries before clicking next if they have been achieved</p>
+            </div>
           </div>
           <div style={{ width: '100%', maxWidth: '500px' }}>
             <div>
               {gambit && gambit.name != 'Proceed as Planned' ? (
                 <>
+                  <h4>
+                    If Gambit successful add this to your score: <b> {Math.min(30, 50 - primaryScore)} VP</b>
+                  </h4>
                   <h3>Gambit</h3>
                   <h4>{gambit.name}</h4>
                   <p>
@@ -127,7 +135,7 @@ const handleDrawMission = () => {
               <h4>
                 <strong>Mission Rule</strong>
               </h4>
-              <div style={{ display: 'flex', flexDirection:"column", gap: '30px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                 {store.rule.map((mission, index) => {
                   return (
                     <div key={index} style={{ border: '1px solid white', padding: '20px', flex: '1' }}>

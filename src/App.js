@@ -3,10 +3,12 @@ import Battle from './components/Battle';
 import Missions from './components/Missions';
 import Rules from './components/Rules';
 import { useState } from 'react';
+import { useStore } from '../src/store/store';
 
 function App() {
+  const turn = useStore((state) => state.turn);
+  const [phase, setPhase] = useState(turn >1 ? 1 : 3);
 
-  const [phase, setPhase] = useState(1);
 
   return (
     <div className="App">
