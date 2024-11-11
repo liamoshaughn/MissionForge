@@ -1,5 +1,4 @@
 import { useState } from "react";
-import deck from "../warhammer-deck.json";
 import Primary from "./missions/Primary";
 import GameRule from "./missions/GameRule";
 import Deployments from "./missions/Deployments";

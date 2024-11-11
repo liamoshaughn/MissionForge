@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
-export default function Deployments(props) {
+export default function Deployments() {
     const store = useStore();
     const deployment= useStore((state) => state.deployment)
 

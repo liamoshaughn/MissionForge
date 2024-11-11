@@ -1,9 +1,8 @@
-import { useState } from 'react';
 import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
-export default function Primary(props) {
+export default function Primary() {
     const store = useStore();
     const turn = useStore((state) => state.turn)
     const mission = useStore((state) => state.mission)

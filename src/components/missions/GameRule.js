@@ -3,7 +3,7 @@ import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
-export default function GameRule(props) {
+export default function GameRule() {
   const store = useStore();
   const rule = useStore((state) => state.rule);
 

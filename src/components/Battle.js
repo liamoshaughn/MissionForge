@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import MissionCard from './MissionCard';
 import Gambit from './missions/Gambit';
 
-export default function Battle(props) {
+export default function Battle() {
   const store = useStore();
   const turn = useStore((state) => state.turn);
   const deck = useStore((state) => state.deck);

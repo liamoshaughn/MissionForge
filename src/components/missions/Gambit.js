@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
+
 import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
-import MissionCard from '../MissionCard';
 
-export default function Gambit(props) {
+export default function Gambit() {
     const store = useStore();
 
 
