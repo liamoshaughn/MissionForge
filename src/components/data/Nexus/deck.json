@@ -129,7 +129,7 @@
     },
     {
       "name": "Hidden Supplies",
-      "rule": "When Drawn: If you also drew The Ritual Primary Mission card, discard this Mission Rule card and draw a new Mission Rule card.\n\nIn the Place Objective Markers step, players must set up one additional objective marker in No Man’s Land.\n\nBefore setting up this new objective marker, players must first move the objective marker in the centre of the battlefield 6” directly towards one of the corners of the battlefield (if No Man’s Land touches any of the corners of the battlefield, you must move the objective marker towards one of those corners). Otherwise, the players roll-off, and the winner selects which corner the objective marker is moved towards. Players then set up the new objective marker 6” from the centre of the battlefield towards the diagonally opposite corner of the battlefield to the previously moved objective marker."
+      "rule": "In the Place Objective Markers step, players must set up one additional objective marker in No Man’s Land.\n\nBefore setting up this new objective marker, players must first move the objective marker in the centre of the battlefield 6” directly towards one of the corners of the battlefield (if No Man’s Land touches any of the corners of the battlefield, you must move the objective marker towards one of those corners). Otherwise, the players roll-off, and the winner selects which corner the objective marker is moved towards. Players then set up the new objective marker 6” from the centre of the battlefield towards the diagonally opposite corner of the battlefield to the previously moved objective marker."
     },
     {
       "name": "Fog of War",
@@ -144,7 +144,8 @@
     "fixed": [
       {
         "name": "Behind Enemy Lines",
-        "mission": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nWHEN: End of your turn.\n\nOne unit from your army (excluding AIRCRAFT and Battle-shocked units) is wholly within your opponent’s deployment zone. score 3VP\n\nOR\n\nTwo or more units from your army (excluding AIRCRAFT and Battle-shocked units) are wholly within your opponent’s deployment zone. Score 4VP"
+        "mission": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nWHEN: End of your turn.\n\nOne unit from your army (excluding AIRCRAFT and Battle-shocked units) is wholly within your opponent’s deployment zone. score 3VP\n\nOR\n\nTwo or more units from your army (excluding AIRCRAFT and Battle-shocked units) are wholly within your opponent’s deployment zone. Score 4VP",
+        "shuffle": "true"
       },
       {
         "name": "Assassination",
@@ -156,7 +157,8 @@
       },
       {
         "name": "Storm Hostile Objective",
-        "mission": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nWHEN: End of your turn.\n\nYou control one or more objective markers that were controlled by your opponent at the start of the turn. Score 4VP\n\nOR (SECOND BATTLE ROUND ONWARDS)\n\nYour opponent did not control any objective markers at the start of the turn, and you control one or more objective markers that you did not control at the start of the turn. Score 4VP"
+        "mission": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nWHEN: End of your turn.\n\nYou control one or more objective markers that were controlled by your opponent at the start of the turn. Score 4VP\n\nOR (SECOND BATTLE ROUND ONWARDS)\n\nYour opponent did not control any objective markers at the start of the turn, and you control one or more objective markers that you did not control at the start of the turn. Score 4VP",
+        "shuffle": "true"
       },
       {
         "name": "Cull the Horde",
@@ -202,7 +204,8 @@
       },
       {
         "name": "Defend Stronghold",
-        "mission": "When Drawn: If it is the first battle round, draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nSecond Battle Round Onwards\nWHEN: End of your opponent’s turn or the end of the battle (whichever comes first).\n\nYou control one or more objective markers in your deployment zone. Score 3VP"
+        "mission": "When Drawn: If it is the first battle round, draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nSecond Battle Round Onwards\nWHEN: End of your opponent’s turn or the end of the battle (whichever comes first).\n\nYou control one or more objective markers in your deployment zone. Score 3VP",
+        "shuffle": "true"
       },
       {
         "name": "Sabotage",

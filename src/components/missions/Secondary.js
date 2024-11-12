@@ -34,11 +34,9 @@ export default function Secondary(props) {
       const shuffled = remainingMissions.sort(() => Math.random() - 0.5);
 
 
-      console.log(shuffled);
       store.setDeck(shuffled);
     } else {
       const shuffled = deck.secondary_missions.tactical;
-      console.log(shuffled);
       store.setDeck(shuffled);
     }
     props.nextPhase();

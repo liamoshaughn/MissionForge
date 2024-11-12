@@ -25,7 +25,7 @@ export default function Primary() {
                 <h4><strong>Special Rule</strong></h4>
                 <p>{mission.special}</p>
                 <h4><strong>Battle Round - Turn {turn + 2}</strong></h4>
-                <p>{mission.battle_rounds[turn]}</p>
+                <p>{mission.battle_rounds[turn+1]}</p>
             </div>
             </div>
         ) : <button onClick={()=>determineMission()}>Draw Mission</button>}

@@ -21,6 +21,13 @@ export default function Battle() {
   const handleDiscard = (discard) => {
     store.setSecondary(secondary.filter((mission) => mission !== discard));
   };
+  const handleShuffle = (shuffle) => {
+    const leftOver = secondary.filter((mission) => mission !== shuffle)
+    store.setSecondary([...leftOver, deck.pop()]);
+    deck.push(shuffle)
+    store.setDeck(deck.sort(() => Math.random() - 0.5))
+  };
+
   const handleNext = () => {
     if (turn === 2) {
       setGambitTime(true);
@@ -47,6 +54,8 @@ export default function Battle() {
 
     const maxHandSize = hasTargetsOfOpportunity ? 3 : 2;
 
+    console.log(maxHandSize, secondary.length)
+
     if (deck.length > 0 && secondary.length < maxHandSize) {
       const remainingCardsToDraw = maxHandSize - secondary.length;
       const drawnMissions = [];
@@ -56,7 +65,7 @@ export default function Battle() {
         drawnMissions.push(drawnMission);
       }
 
-      store.setDeck(deck); // Assuming you have a setDeck function in your store
+      store.setDeck(deck);
       store.setSecondary([...secondary, ...drawnMissions]);
     }
   };
@@ -118,6 +127,7 @@ export default function Battle() {
                       key={index}
                       index={index}
                       mission={mission}
+                      handleShuffle={() => handleShuffle(mission)}
                       handleDiscard={() => handleDiscard(mission)}
                     />
                   ))}
