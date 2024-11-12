@@ -1,5 +1,5 @@
 import { useStore } from '../store/store';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState} from 'react';
 import MissionCard from './MissionCard';
 import Gambit from './missions/Gambit';
 
@@ -21,7 +21,6 @@ export default function Battle() {
   const handleDiscard = (discard) => {
     store.setSecondary(secondary.filter((mission) => mission !== discard));
   };
-
   const handleNext = () => {
     if (turn === 2) {
       setGambitTime(true);
@@ -72,9 +71,9 @@ export default function Battle() {
     <div style={{ width: '100vw', height: 'fit-content' }}>
       {endGame ? (
         <>
-          {gambit.name !== 'Proceed as Planned' && gambitSuccess === null ? (
+          {gambit && gambit.name !== 'Proceed as Planned' && gambitSuccess === null ? (
             <div>
-              <h2>Was the gambit completed successfully?</h2>
+              <h2>Was the {store.gamemode.secrets ? "Secret Mission" : "Gambit"} completed successfully?</h2>
               <button
                 onClick={() => {
                   setGambitSuccess(true);
@@ -85,7 +84,7 @@ export default function Battle() {
               </button>
               <button
                 onClick={() => {
-                  setGambitSuccess(true);
+                  setGambitSuccess(false);
                   localStorage.clear();
                 }}
               >
@@ -96,7 +95,7 @@ export default function Battle() {
             <h2>
               Final Score:{' '}
               {(() => {
-                const gambitScore = gambitSuccess ? Math.min(30, 50 - primaryScore) : 0;
+                const gambitScore = gambitSuccess ? (store.gamemode.secrets ? 20 : Math.min(30, 50 - primaryScore)) : 0;
                 return primaryScore + secondaryScore + gambitScore;
               })()}
             </h2>
@@ -105,7 +104,7 @@ export default function Battle() {
       ) : (
         <>
           {gambitTime && !gambit ? (
-            <Gambit />
+            <Gambit skip={()=>setGambitTime(false)}/>
           ) : (
             <div style={{ display: 'flex', gap: '3%', flexWrap: 'wrap' }}>
               <div style={{ width: '100%', maxWidth: '500px' }}>
@@ -127,15 +126,15 @@ export default function Battle() {
               <div style={{ width: '100%', maxWidth: '300px' }}>
                 <h2>Score {primaryScore + secondaryScore}</h2>
                 <div>
-                  <h3>Primary Score</h3>
+                  <h3>Primary Score : {primaryScore}</h3>
                   <input
-                    disabled={gambit && gambit?.name !== 'Proceed as Planned' ? true : false}
+                    disabled={store.gamemode.secrets ? primaryScore>=20 && gambit : gambit && gambit?.name !== 'Proceed as Planned' ? true : false}
                     value={currentPrimary}
                     onChange={(e) => setCurrentPrimary(e.target.value)}
                   />
                 </div>
                 <div>
-                  <h3>Secondary Score</h3>
+                  <h3>Secondary Score: {secondaryScore}</h3>
                   <input value={currentSecondary} onChange={(e) => setCurrentSecondary(e.target.value)} />
                 </div>
                 <div style={{ marginTop: '20px' }}>
@@ -150,12 +149,12 @@ export default function Battle() {
                   {gambit && gambit.name !== 'Proceed as Planned' ? (
                     <>
                       <h4>
-                        If Gambit successful add this to your score: <b> {Math.min(30, 50 - primaryScore)} VP</b>
+                        If {store.gamemode.secrets ? "Secret Mission" : "Gambit"} successful add this to your score: <b> {store.gamemode.secrets ? 20 : Math.min(30, 50 - primaryScore)}  VP</b>
                       </h4>
-                      <h3>Gambit</h3>
+                      <h3>{store.gamemode.secrets ? "Secret Mission" : "Gambit"}</h3>
                       <h4>{gambit.name}</h4>
                       <p>
-                        <strong>Gambit Mission:</strong> <br />
+                        <strong>{store.gamemode.secrets ? "Secret Mission" : "Gambit Mission"}:</strong> <br />
                         {gambit.gambit}
                       </p>
                     </>

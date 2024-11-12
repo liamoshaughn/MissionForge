@@ -218,12 +218,11 @@
       }
     ]
   },
-  "secrets": {
-    "proceed": {
+  "secrets": [
+      {
       "name": "Unbroken Wall",
       "gambit": "WHEN: End of the battle.\n\nYou control three or more objective markers that are not within your deployment zone."
     },
-    "choices": [
       {
         "name": "Command Insertion",
         "gambit": "WHEN: End of the battle.\n\nYour WARLORD is within range of one or more objective markers in your opponent’s deployment zone that you control."
@@ -236,8 +235,7 @@
         "name": "War of Attrition",
         "gambit": "WHEN: End of the battle.\n\nOne or more BATTLELINE units from your army are within your opponent’s deployment zone, and one of the following conditions applies:\nThere are no BATTLELINE units from your opponent’s army on the battlefield.\nEvery BATTLELINE unit from your opponent’s army that is on the battlefield is within your opponent’s deployment zone."
       }
-    ]
-  },
+    ],
   "deployments": [
     { "name": "Crucible of Battle", "image": "images/crucible2.jpg" },
     { "name": "Dawn of War", "image": "images/dawn2.jpg" },
