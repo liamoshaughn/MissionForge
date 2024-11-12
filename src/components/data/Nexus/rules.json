@@ -1,0 +1,63 @@
+[
+  {
+    "title": "Muster Armies",
+    "instruction": "Muster armies as described in the Core Rules."
+  },
+  {
+    "title": "Determine Mission",
+    "instruction": "Shuffle the Deployment, Mission Rule and Primary Mission decks, then draw one card from each of those decks for both players to use during the battle."
+  },
+  {
+    "title": "Read Mission",
+    "instruction": "Read the Primary Mission and Mission Rule cards drawn. The Primary Mission card details how and when you score Victory points (VP), and may also apply additional conditions to the battle. You can also score VP by achieving Secondary Missions and Secret Missions (described later). The Mission Rule card details any special rules that apply to the battle."
+  },
+  {
+    "title": "Place Objective Markers",
+    "instruction": "Set up objective markers on the battlefield, as shown on the Deployment card drawn."
+  },
+  {
+    "title": "Create The Battlefield",
+    "instruction": "Create the battlefield and set up terrain features (see the Core Rules). Missions are played on rectangular battlefields 44” by 60” in size. Terrain features should not be set up within any impassable sections (such as the walls of a ruin) within 1” of any objective markers."
+
+  },
+  {
+    "title": "Determine Attacker and Defender",
+    "instruction": "Look at the Deployment card drawn and agree which edges of your battlefield are the Attacker’s and Defender’s battlefield edges. Roll off: the winner decides who will be the Attacker and who will be the Defender."
+  },
+  {
+    "title": "Select Secondary Missions",
+    "instruction": "Secondary Mission cards detail additional ways to score VP, and must be used either as Fixed or Tactical Missions. Players now secretly note down whether they will use Fixed or Tactical Missions; if using Fixed Missions, they must also note down which two Fixed Missions they will use (see below). Players then reveal these decisions and proceed accordingly.\n\n\nFixed Missions\n\nFixed Missions are goals that remain throughout the battle, and can be achieved multiple times. Your selected Fixed Mission cards cannot be discarded for any reason other than the Adapt or Die Mission Rule card.\n\n\nTactical Missions\n\nTactical Missions are replenished at the start of your Command phase, and are discarded once achieved.\n\n At the start of your first Command phase, draw two cards from your Secondary Mission deck; those two Secondary Mission cards are active for you until you achieve them. At the start of each of your subsequent Command phases, if you have fewer than two active Secondary Mission cards, draw from your Secondary Mission deck until you have two active Secondary Mission cards.\n\nAt the end of your Command phase, you can spend CP to use the New Orders Stratagem\n\nAt the end of either player’s turn, if you scored any VP this turn as described on a Secondary Mission card, discard that Secondary Mission card – it is achieved.\n\nAt the end of your turn, you can discard one or more of your active Secondary Mission cards. If you do, you gain 1CP.\n\nIf your Secondary Mission deck runs out, you cannot generate any additional Secondary Missions during the battle."
+  },
+  {
+    "title": "Declare Battle Formations",
+    "instruction": "Players secretly note down which of their Leader units will start the battle attached to which Bodyguard units, which of their units will start the battle embarked within which TRANSPORTS, and which of their units will start the battle in Reserves (including Strategic Reserves). Players then reveal these decisions.\n\nReserve Restrictions\n\nNo more than half of the units in your army can start the battle in Reserves, and the points total of those units cannot be more than half of the points total of your army (units embarked within a TRANSPORT that is set up in Reserves also count towards these limits).\n\nReserves units cannot arrive on the battlefield during the first battle round (excluding units placed into Strategic Reserves during the battle).\n\nAny Reserves units that have not arrived on the battlefield by the end of the third battle round count as having been destroyed, as do any units embarked within them (excluding units placed into Strategic Reserves during the battle)."
+  },
+  {
+    "title": "Deploy Armies",
+    "instruction": "Players take it in turns to set up their remaining units one at a time, starting with the Defender. A player’s models must be set up wholly within their deployment zone. If a player sets up a TITANIC unit when it is their turn to set up a unit, they skip their next turn to set up a unit. If one player finishes deploying all of their units, their opponent then deploys the remainder of their units."
+  },
+  {
+    "title": "Redeploy Units",
+    "instruction": "Some rules allow players to redeploy certain units after both armies are deployed. Unless otherwise stated, such rules are resolved in this step. Players alternate resolving any such rules, starting with the Attacker."
+  },
+  {
+    "title": "Determine First Turn",
+    "instruction": "Roll off: the winner takes the first turn."
+  },
+  {
+    "title": "Resolve Pre-battle Rules",
+    "instruction": "Players alternate resolving any pre-battle rules units from their army may have, starting with the player who will take the first turn."
+  },
+  {
+    "title": "Begin the Battle",
+    "instruction": "The first battle round begins. Players continue to resolve battle rounds until the battle ends."
+  },
+  {
+    "title": "End the Battle",
+    "instruction": "The battle ends after five battle rounds have been completed. Even if one player has no models remaining in their army at the start of their turn, players continue to play out their turns until the battle ends."
+  },
+  {
+    "title": "Determine Victor",
+    "instruction": "At the end of the battle, the player with the most VP is the winner. If the players are tied, the battle is a draw. The maximum VP each player can score is 100VP. Each player scores 10VP if their army is painted to a Battle Ready standard. The maximum VP that can be scored from each source of VP is detailed on below. In all cases, any excess VP awarded above these maximums are lost."
+  }
+]

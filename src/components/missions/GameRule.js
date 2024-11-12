@@ -1,17 +1,24 @@
 import { useState } from 'react';
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
 export default function GameRule() {
   const store = useStore();
+  const deck = useStore((state) => state.gamemode);
   const rule = useStore((state) => state.rule);
 
   const [maelstrom, setMaelstrom] = useState(false);
 
   const determineRule = () => {
     let missions = deck.mission_rules;
-    const randNum = Math.floor(Math.random() * 12);
+    let randNum = Math.floor(Math.random() * 12);
+
+    console.log(store)
+    
+    if (missions[randNum].name === 'Hidden Supplies' && store.mission.name === 'The Ritual') {
+      missions = missions.filter((selected) => selected.name !== 'Hidden Supplies');
+      randNum = Math.floor(Math.random() * 12);
+    }
 
     if (missions[randNum].name === 'Maelstrom of Battle') {
       // Remove "Maelstrom of Battle" from missions
@@ -57,7 +64,6 @@ export default function GameRule() {
     }
   };
 
-
   return (
     <div style={{ width: '100%', height: 'fit-content' }}>
       <h2>Mission Rule</h2>
@@ -69,7 +75,11 @@ export default function GameRule() {
           <Autocomplete data={deck.mission_rules} select={(selection) => handleSelection(selection)} />
         </>
       ) : null}
-      {rule?.length >= 2 && <div><p>Maelstrom of Battle, extra rules have been drawn</p></div>}
+      {rule?.length >= 2 && (
+        <div>
+          <p>Maelstrom of Battle, extra rules have been drawn</p>
+        </div>
+      )}
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '30px' }}>
         {rule ? (
           <>

@@ -17,6 +17,19 @@ export const useStore = create((set) => {
 
   // Create the store with initial state and save updates to localStorage
   return {
+
+    gamemode: false,
+    setGamemode: (gamemode) => set((state) => {
+      const newState = {...state, gamemode};
+      return newState;
+    }),
+
+    gameRules: false,
+    setGameRules: (gameRules) => set((state) => {
+      const newState = {...state, gameRules};
+      return newState;
+    }),
+
     mission: initialState.mission || null,
     setMission: (mission) => set((state) => {
       const newState = { ...state, mission };

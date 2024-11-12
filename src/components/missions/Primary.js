@@ -1,9 +1,9 @@
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
 export default function Primary() {
     const store = useStore();
+    const deck = useStore((state) => state.gamemode)
     const turn = useStore((state) => state.turn)
     const mission = useStore((state) => state.mission)
     const determineMission = () => {
@@ -24,8 +24,8 @@ export default function Primary() {
             <div style={{ fontSize: '12px' }}>
                 <h4><strong>Special Rule</strong></h4>
                 <p>{mission.special}</p>
-                <h4><strong>Battle Round - Turn {turn + 1}</strong></h4>
-                <p>{mission.battle_rounds[turn]}</p>
+                <h4><strong>Battle Round - Turn {turn + 2}</strong></h4>
+                <p>{mission.battle_rounds[turn+1]}</p>
             </div>
             </div>
         ) : <button onClick={()=>determineMission()}>Draw Mission</button>}

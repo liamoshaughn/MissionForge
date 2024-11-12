@@ -1,10 +1,10 @@
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import { useEffect, useState } from 'react';
 import MissionCard from '../MissionCard';
 
 export default function Secondary(props) {
   const store = useStore();
+  const deck = useStore((state) => state.gamemode)
   const [type, setType] = useState();
   const [selectedMissions, setSelectedMissions] = useState([]);
 
@@ -23,6 +23,7 @@ export default function Secondary(props) {
     }
   };
 
+
   const handleNext = () => {
     if (type === 'tactical') {
       const remainingMissions = [
@@ -32,13 +33,13 @@ export default function Secondary(props) {
 
       // Shuffle the remaining missions
       const shuffled = remainingMissions.sort(() => Math.random() - 0.5);
+      store.setSecondary([shuffled.pop(), shuffled.pop()]);
 
 
-      console.log(shuffled);
       store.setDeck(shuffled);
     } else {
+      store.setSecondary(selectedMissions);
       const shuffled = deck.secondary_missions.tactical;
-      console.log(shuffled);
       store.setDeck(shuffled);
     }
     props.nextPhase();
@@ -50,12 +51,12 @@ export default function Secondary(props) {
   }
 
   useEffect(() => {
-    store.setMode(type);
+    if(!store.mode && type){
+      store.setMode(type);
+    }
+    
   }, [type, store]);
 
-  useEffect(() => {
-    store.setSecondary(selectedMissions);
-  }, [selectedMissions, store]);
 
 
 
