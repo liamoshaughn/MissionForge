@@ -1,9 +1,9 @@
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
 export default function Deployments() {
     const store = useStore();
+    const deck = useStore((state) => state.gamemode)
     const deployment= useStore((state) => state.deployment)
 
     const determineDeployment = () => {

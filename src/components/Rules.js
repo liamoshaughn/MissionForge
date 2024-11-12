@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import rules from "../warhammer-rules.json";
+import { useStore } from "../store/store";
+
 
 export default function Rules(props){
+
+    const rules  = useStore((state) => state.gameRules)
     const [increment, setIncrement] = useState(0);
 
 

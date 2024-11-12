@@ -1,10 +1,9 @@
 
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 
 export default function Gambit() {
     const store = useStore();
-
+    const deck = useStore((state) => state.gamemode)
 
 
 

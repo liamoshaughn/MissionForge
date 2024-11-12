@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
 
 export default function GameRule() {
   const store = useStore();
+  const deck = useStore((state) => state.gamemode)
   const rule = useStore((state) => state.rule);
 
   const [maelstrom, setMaelstrom] = useState(false);

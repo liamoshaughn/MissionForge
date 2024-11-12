@@ -1,10 +1,10 @@
-import deck from '../../warhammer-deck.json';
 import { useStore } from '../../store/store';
 import { useEffect, useState } from 'react';
 import MissionCard from '../MissionCard';
 
 export default function Secondary(props) {
   const store = useStore();
+  const deck = useStore((state) => state.gamemode)
   const [type, setType] = useState();
   const [selectedMissions, setSelectedMissions] = useState([]);
 
