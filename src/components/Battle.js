@@ -2,7 +2,6 @@ import { useStore } from '../store/store';
 import { useEffect, useState } from 'react';
 import MissionCard from './MissionCard';
 import Gambit from './missions/Gambit';
-import Autocomplete from './Autocomplete';
 
 export default function Battle() {
   const store = useStore();

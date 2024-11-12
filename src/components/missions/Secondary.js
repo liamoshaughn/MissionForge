@@ -33,6 +33,7 @@ export default function Secondary(props) {
 
       // Shuffle the remaining missions
       const shuffled = remainingMissions.sort(() => Math.random() - 0.5);
+      store.setSecondary([shuffled.pop(), shuffled.pop()]);
 
 
       store.setDeck(shuffled);

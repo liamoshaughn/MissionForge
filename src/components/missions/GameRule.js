@@ -11,7 +11,7 @@ export default function GameRule() {
 
   const determineRule = () => {
     let missions = deck.mission_rules;
-    const randNum = Math.floor(Math.random() * 12);
+    let randNum = Math.floor(Math.random() * 12);
 
     console.log(store)
     
