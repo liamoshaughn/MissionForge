@@ -1,7 +1,8 @@
 import { useStore } from '../store/store';
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import MissionCard from './MissionCard';
 import Gambit from './missions/Gambit';
+import Autocomplete from './Autocomplete';
 
 export default function Battle() {
   const store = useStore();
@@ -17,16 +18,22 @@ export default function Battle() {
   const [gambitTime, setGambitTime] = useState(false);
   const [endGame, setEndGame] = useState(false);
   const [gambitSuccess, setGambitSuccess] = useState(null);
+  const [adaptActivations, setAdaptActivations] = useState(store.mode === 'fixed' ? 1 : 2);
+  const [adaptTime, setAdaptTime] = useState(false);
+  const [adaptMissions, setAdaptMissions] = useState(false);
 
+  console.log(adaptMissions);
   const handleDiscard = (discard) => {
     store.setSecondary(secondary.filter((mission) => mission !== discard));
   };
   const handleShuffle = (shuffle) => {
-    const leftOver = secondary.filter((mission) => mission !== shuffle)
+    const leftOver = secondary.filter((mission) => mission !== shuffle);
     store.setSecondary([...leftOver, deck.pop()]);
-    deck.push(shuffle)
-    store.setDeck(deck.sort(() => Math.random() - 0.5))
+    deck.push(shuffle);
+    store.setDeck(deck.sort(() => Math.random() - 0.5));
   };
+
+  console.log(store);
 
   const handleNext = () => {
     if (turn === 2) {
@@ -54,7 +61,7 @@ export default function Battle() {
 
     const maxHandSize = hasTargetsOfOpportunity ? 3 : 2;
 
-    console.log(maxHandSize, secondary.length)
+    console.log(maxHandSize, secondary.length);
 
     if (deck.length > 0 && secondary.length < maxHandSize) {
       const remainingCardsToDraw = maxHandSize - secondary.length;
@@ -70,6 +77,12 @@ export default function Battle() {
     }
   };
 
+  const handleMissionClick = () => {
+    if (adaptActivations >= 1) {
+      setAdaptTime(true);
+    }
+  };
+
   useEffect(() => {
     if (endGame) {
       localStorage.clear();
@@ -82,7 +95,7 @@ export default function Battle() {
         <>
           {gambit && gambit.name !== 'Proceed as Planned' && gambitSuccess === null ? (
             <div>
-              <h2>Was the {store.gamemode.secrets ? "Secret Mission" : "Gambit"} completed successfully?</h2>
+              <h2>Was the {store.gamemode.secrets ? 'Secret Mission' : 'Gambit'} completed successfully?</h2>
               <button
                 onClick={() => {
                   setGambitSuccess(true);
@@ -113,98 +126,179 @@ export default function Battle() {
       ) : (
         <>
           {gambitTime && !gambit ? (
-            <Gambit skip={()=>setGambitTime(false)}/>
+            <Gambit skip={() => setGambitTime(false)} />
           ) : (
-            <div style={{ display: 'flex', gap: '3%', flexWrap: 'wrap' }}>
-              <div style={{ width: '100%', maxWidth: '500px' }}>
-                <h2>Battle - Turn {turn + 1}</h2>
-                <h3>
-                  Current Missions <button onClick={() => handleDrawMission()}>Draw Missions</button>{' '}
-                </h3>
-                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                  {secondary.map((mission, index) => (
-                    <MissionCard
-                      key={index}
-                      index={index}
-                      mission={mission}
-                      handleShuffle={() => handleShuffle(mission)}
-                      handleDiscard={() => handleDiscard(mission)}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div style={{ width: '100%', maxWidth: '300px' }}>
-                <h2>Score {primaryScore + secondaryScore}</h2>
-                <div>
-                  <h3>Primary Score : {primaryScore}</h3>
-                  <input
-                    disabled={store.gamemode.secrets ? primaryScore>=20 && gambit : gambit && gambit?.name !== 'Proceed as Planned' ? true : false}
-                    value={currentPrimary}
-                    onChange={(e) => setCurrentPrimary(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <h3>Secondary Score: {secondaryScore}</h3>
-                  <input value={currentSecondary} onChange={(e) => setCurrentSecondary(e.target.value)} />
-                </div>
-                <div style={{ marginTop: '20px' }}>
-                  <button onClick={() => handleNext()}>Next Turn</button>
-                </div>
-                <div>
-                  <p>Make sure to score and discard secondaries before clicking next if they have been achieved</p>
-                </div>
-              </div>
-              <div style={{ width: '100%', maxWidth: '500px' }}>
-                <div>
-                  {gambit && gambit.name !== 'Proceed as Planned' ? (
-                    <>
-                      <h4>
-                        If {store.gamemode.secrets ? "Secret Mission" : "Gambit"} successful add this to your score: <b> {store.gamemode.secrets ? 20 : Math.min(30, 50 - primaryScore)}  VP</b>
-                      </h4>
-                      <h3>{store.gamemode.secrets ? "Secret Mission" : "Gambit"}</h3>
-                      <h4>{gambit.name}</h4>
-                      <p>
-                        <strong>{store.gamemode.secrets ? "Secret Mission" : "Gambit Mission"}:</strong> <br />
-                        {gambit.gambit}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <h3>Primary Mission</h3>
-                      <h4>{store.mission.name}</h4>
-                      <p>
-                        <strong>Primary Mission Rule:</strong> <br />
-                        {store.mission.special}
-                      </p>
-                      <p>
-                        <strong>Scoring for current round:</strong> <br /> {store.mission.battle_rounds[turn]}
-                      </p>
-                    </>
-                  )}
-                </div>
-                <div>
-                  <h4>
-                    <strong>Mission Rule</strong>
-                  </h4>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-                    {store.rule.map((mission, index) => {
-                      return (
-                        <div key={index} style={{ border: '1px solid white', padding: '20px', flex: '1' }}>
-                          <h3>{mission.name}</h3>
-                          <div style={{ fontSize: '12px' }}>
-                            <p>{mission.rule}</p>
+            <>
+              {adaptTime ? (
+                <>
+                  {!adaptMissions ? (
+                    <div>
+                      <h2>Current Missions</h2>
+                      <h3>Choose One to {store.mode === 'tactical' && 'maybe'} Discard</h3>
+                      <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', maxWidth: '700px' }}>
+                        {secondary.map((mission, index) => (
+                          <div
+                            onClick={() => {
+                              setAdaptMissions([mission, deck.pop()]);
+                              handleDiscard(mission);
+                            }}
+                          >
+                            <MissionCard key={index} index={index} mission={mission} />
                           </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <h2>Pick One</h2>
+                      {store.mode === 'tactical' ? (
+                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', maxWidth: '700px' }}>
+                          {adaptMissions.map((mission, index) => (
+                            <div
+                              onClick={() => {
+                                store.setSecondary([...secondary, mission]);
+                                setAdaptTime(false);
+                                setAdaptMissions(false);
+                                setAdaptActivations(adaptActivations - 1);
+                              }}
+                            >
+                              <MissionCard key={index} index={index} mission={mission} />
+                            </div>
+                          ))}
                         </div>
-                      );
-                    })}
+                      ) : (
+                        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', maxWidth: '90%' }}>
+                          {deck.map((mission, index) => (
+                            <div
+                              style={{ maxWidth:"250px"}}
+                              onClick={() => {
+                                store.setSecondary([...secondary, mission]);
+                                setAdaptTime(false);
+                                setAdaptMissions(false);
+                                setAdaptActivations(adaptActivations - 1);
+                              }}
+                            >
+                              <MissionCard key={index} index={index} mission={mission} />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div style={{ display: 'flex', gap: '3%', flexWrap: 'wrap' }}>
+                  <div style={{ width: '100%', maxWidth: '500px' }}>
+                    <h2>Battle - Turn {turn + 1}</h2>
+                    <h3>
+                      Current Missions{' '}
+                      {store.mode === 'tactical' && <button onClick={() => handleDrawMission()}>Draw Missions</button>}
+                    </h3>
+                    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                      {secondary.map((mission, index) => (
+                        <MissionCard
+                          key={index}
+                          index={index}
+                          mission={mission}
+                          handleShuffle={() => handleShuffle(mission)}
+                          handleDiscard={() => handleDiscard(mission)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ width: '100%', maxWidth: '300px' }}>
+                    <h2>Score {primaryScore + secondaryScore}</h2>
+                    <div>
+                      <h3>Primary Score : {primaryScore}</h3>
+                      <input
+                        disabled={
+                          store.gamemode.secrets
+                            ? primaryScore >= 20 && gambit
+                            : gambit && gambit?.name !== 'Proceed as Planned'
+                            ? true
+                            : false
+                        }
+                        value={currentPrimary}
+                        onChange={(e) => setCurrentPrimary(e.target.value)}
+                      />
+                    </div>
+                    <div>
+                      <h3>Secondary Score: {secondaryScore}</h3>
+                      <input value={currentSecondary} onChange={(e) => setCurrentSecondary(e.target.value)} />
+                    </div>
+                    <div style={{ marginTop: '20px' }}>
+                      <button onClick={() => handleNext()}>Next Turn</button>
+                    </div>
+                    <div>
+                      <p>Make sure to score and discard secondaries before clicking next if they have been achieved</p>
+                    </div>
+                  </div>
+                  <div style={{ width: '100%', maxWidth: '500px' }}>
+                    <div>
+                      {gambit && gambit.name !== 'Proceed as Planned' ? (
+                        <>
+                          <h4>
+                            If {store.gamemode.secrets ? 'Secret Mission' : 'Gambit'} successful add this to your score:{' '}
+                            <b> {store.gamemode.secrets ? 20 : Math.min(30, 50 - primaryScore)} VP</b>
+                          </h4>
+                          <h3>{store.gamemode.secrets ? 'Secret Mission' : 'Gambit'}</h3>
+                          <h4>{gambit.name}</h4>
+                          <p>
+                            <strong>{store.gamemode.secrets ? 'Secret Mission' : 'Gambit Mission'}:</strong> <br />
+                            {gambit.gambit}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <h3>Primary Mission</h3>
+                          <h4>{store.mission.name}</h4>
+                          <p>
+                            <strong>Primary Mission Rule:</strong> <br />
+                            {store.mission.special}
+                          </p>
+                          <p>
+                            <strong>Scoring for current round:</strong> <br /> {store.mission.battle_rounds[turn]}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div>
+                      <h4>
+                        <strong>Mission Rule</strong>
+                      </h4>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
+                        {store.rule.map((mission, index) => {
+                          return (
+                            <div
+                              onClick={() => handleMissionClick()}
+                              key={index}
+                              style={{ border: '1px solid white', padding: '20px', flex: '1' }}
+                            >
+                              {mission.name === 'Adapt or Die' && (
+                                <div>
+                                  <h3>
+                                    <b>Click to activate</b>
+                                  </h3>
+                                  <h3>Activations Remaining: {adaptActivations}</h3>
+                                </div>
+                              )}
+                              <h3>{mission.name}</h3>
+                              <div style={{ fontSize: '12px' }}>
+                                <p>{mission.rule}</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div>
+                      <h3>Deployment</h3>
+                      <img style={{ maxWidth: '300px' }} alt="Deployment Zone" src={store.deployment.image} />
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <h3>Deployment</h3>
-                  <img style={{ maxWidth: '300px' }} alt="Deployment Zone" src={store.deployment.image} />
-                </div>
-              </div>
-            </div>
+              )}
+            </>
           )}
         </>
       )}

@@ -23,6 +23,7 @@ export default function Secondary(props) {
     }
   };
 
+
   const handleNext = () => {
     if (type === 'tactical') {
       const remainingMissions = [
@@ -36,6 +37,7 @@ export default function Secondary(props) {
 
       store.setDeck(shuffled);
     } else {
+      store.setSecondary(selectedMissions);
       const shuffled = deck.secondary_missions.tactical;
       store.setDeck(shuffled);
     }
@@ -54,12 +56,6 @@ export default function Secondary(props) {
     
   }, [type, store]);
 
-  useEffect(() => {
-    if(!store.secondary && selectedMissions){
-      store.setSecondary(selectedMissions);
-    }
-    
-  }, [selectedMissions, store]);
 
 
 
