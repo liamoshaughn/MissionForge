@@ -50,11 +50,17 @@ export default function Secondary(props) {
   }
 
   useEffect(() => {
-    store.setMode(type);
+    if(!store.mode && type){
+      store.setMode(type);
+    }
+    
   }, [type, store]);
 
   useEffect(() => {
-    store.setSecondary(selectedMissions);
+    if(!store.secondary && selectedMissions){
+      store.setSecondary(selectedMissions);
+    }
+    
   }, [selectedMissions, store]);
 
 

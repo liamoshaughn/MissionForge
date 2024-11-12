@@ -24,7 +24,7 @@ export default function Primary() {
             <div style={{ fontSize: '12px' }}>
                 <h4><strong>Special Rule</strong></h4>
                 <p>{mission.special}</p>
-                <h4><strong>Battle Round - Turn {turn + 1}</strong></h4>
+                <h4><strong>Battle Round - Turn {turn + 2}</strong></h4>
                 <p>{mission.battle_rounds[turn]}</p>
             </div>
             </div>

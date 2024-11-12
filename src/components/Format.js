@@ -18,7 +18,7 @@ export default function Format(props) {
             store.setGameRules(gameRules)
             props.nextPhase()
         }
-    },[selectedFormat, store])
+    },[selectedFormat, store, props])
   return (
     <div style={{ width: '50vw', display: 'flex', gap: '5vw' }}>
       <h1>Choose a Format</h1>
