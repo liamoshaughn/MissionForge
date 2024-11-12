@@ -20,7 +20,7 @@ export default function Format(props) {
         }
     },[selectedFormat, store, props])
   return (
-    <div style={{ width: '50vw', display: 'flex', gap: '5vw' }}>
+    <div style={{ width: '50vw', display: 'flex', gap: '5vw', flexWrap:"wrap" }}>
       <h1>Choose a Format</h1>
       {formats.map((format) => {
         return (

@@ -34,7 +34,7 @@ export default function Gambit(props) {
         </div>
       )}
       <h2>Select {store.gamemode.secrets ? 'Secret Mission' : 'Gambit'}</h2>
-      <div style={{ display: 'flex', gap: '30px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', flexWrap:"wrap" }}>
         {determineGambits().map((gambit, index) => {
           return (
             <div

@@ -19,9 +19,9 @@ export default function Deployments() {
         <h2>Deployments</h2>
         <Autocomplete data={deck.deployments} select={(deployment) => store.setDeployment(deployment) } />
         {deployment ? (
-            <div style={{ border: '1px solid white', padding:"20px" }}>
+            <div style={{ border: '1px solid white', padding:"20px", maxWidth:"65vw" }}>
             <h3>{deployment.name}</h3>
-                <img style={{height:"400px"}} alt={`The Chosen Deployment Zone - ${deployment.name}`} src={deployment.image}/>
+                <img style={{width:"100%"}} alt={`The Chosen Deployment Zone - ${deployment.name}`} src={deployment.image}/>
             </div>
         ) : <button onClick={()=>determineDeployment()}>Draw deployment</button>}
         </div>
