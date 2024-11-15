@@ -89,7 +89,7 @@ export default function GameRule() {
               onClick={() => determineRule()}
               onPointerEnter={null}
               onPointerLeave={null}
-              style={{ width: '50%', height: '100vh', right: '10%', left: 'auto', top: '-100px' }}
+              style={{width:"100vw", height: "100vh", right:"0", left:"auto", top:"-100px"}}
             />
           </>
         ) : (

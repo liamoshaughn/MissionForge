@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { Environment, OrbitControls, Outlines, PerspectiveCamera } from '@react-three/drei';
 import Card from './Card';
 import { useSpring, a } from '@react-spring/three';
 import { useGesture } from '@use-gesture/react';
 
-function CardContainer({ data, onClick, onPointerEnter, onPointerLeave }) {
+function CardContainer({ data, onClick, onPointerEnter, onPointerLeave, selected }) {
   const { size, viewport } = useThree();
   const aspect = size.width / viewport.width;
   const [spring, set] = useSpring(() => ({
@@ -18,19 +18,26 @@ function CardContainer({ data, onClick, onPointerEnter, onPointerLeave }) {
     onDrag: ({ offset: [x, y] }) => set({ position: [(x * 2) / aspect, 0, 0] }),
   });
 
+
+
+
+
   return (
     <>
       <a.group {...spring} {...bind()} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
         {data.map((cardData, index) => {
           const cardPositionX = index * 5;
+          const outline = selected.filter((selected) => selected === cardData).length>=1 ? true : false
 
           return (
-            <Card
-              onClick={() => onClick(cardData)}
-              data={cardData}
-              position={[cardPositionX, 0, 0]}
-              battleRound={cardData.battle_rounds && cardData.battle_rounds[1]}
-            />
+            <group position={[cardPositionX + 0.6, -2, 0]}>
+              <Card
+                onClick={() => onClick(cardData)}
+                data={cardData}
+                outlines={outline}
+                battleRound={cardData.battle_rounds && cardData.battle_rounds[1]}
+              />
+            </group>
           );
         })}
       </a.group>
@@ -38,7 +45,7 @@ function CardContainer({ data, onClick, onPointerEnter, onPointerLeave }) {
   );
 }
 
-export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLeave, style, carousel }) {
+export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLeave, style, carousel, selected }) {
   return (
     <div
       style={{
@@ -55,6 +62,7 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
         <Environment preset="park" />
         {carousel ? (
           <CardContainer
+            selected = {selected}
             data={data}
             onClick={(data) => onClick(data)}
             onPointerEnter={onPointerEnter}
@@ -64,7 +72,7 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
           data.map((cardData, index) => {
             const xPos = (index - (data.length - 1.45) / 2) * 4.5; // Center cards based on data length
             return (
-              <group position={[xPos+0.06, -1, 0]}>
+              <group position={[xPos + 0.06, -2, 0]}>
                 <Card
                   key={index}
                   data={cardData}

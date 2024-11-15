@@ -13,7 +13,7 @@ export default function Missions(props){
         {phase === 1 && <GameRule />}
         {phase === 2 && <Deployments />}
         {phase === 3 && <Secondary nextPhase={()=>props.nextPhase()} />}
-        {phase !== 3 && <button onClick={()=>setPhase(phase+1)}style={{marginTop: "50px"}}>Next</button>}
+        {phase !== 3 && <button style={{position:'absolute', zIndex:2, bottom: "10vh", left:'50vw', transform: 'translate(-50%, -50%)',}} onClick={()=>setPhase(phase+1)}s>Next</button>}
     </div>
     );
 }

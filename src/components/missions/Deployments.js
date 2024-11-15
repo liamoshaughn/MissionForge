@@ -22,7 +22,7 @@ export default function Deployments() {
         {deployment ? (
             <CardCanvas
             data={[deployment]}
-            style={{width:"700px", height: "100%", right:"10%", left:"auto", top:"-100px"}}
+            style={{width:"100vw", height: "100vh", right:"0", left:"auto", top:"-100px"}}
           />
         ) : <button onClick={()=>determineDeployment()}>Draw deployment</button>}
         </div>

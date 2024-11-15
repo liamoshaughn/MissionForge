@@ -14,7 +14,7 @@ export default function Primary() {
 
   return (
     <div style={{ width: '100%', height: 'fit-content' }}>
-      <div>
+      <div style={{position:'absolute'}}>
       <h2>Primary Mission</h2>
       <Autocomplete data={deck.primary_missions} select={(mission) => store.setMission(mission)} />
 
@@ -28,7 +28,7 @@ export default function Primary() {
           style={{width:"100vw", height: "100vh", right:"0", left:"auto", top:"-100px"}}
         />
       ) : (
-        <button onClick={() => determineMission()}>Draw Mission</button>
+        <button style={{position:"absolute", bottom:'50vh', left:'50vw', transform: 'translate(-50%)', zIndex: 2}} onClick={() => determineMission()}>Draw Mission</button>
       )}
     </div>
   );

@@ -18,7 +18,7 @@ function TexturedPlane(props) {
   const planeHeight = planeWidth / imageAspectRatio; // Height based on aspect ratio
 
   return (
-    <mesh position={[-1.1, 1.5, -0.8]} scale={0.7}>
+    <mesh position={[-1.1, 1.5, -0.7]} scale={0.7}>
       <planeGeometry args={[planeWidth, planeHeight]} />
       <meshStandardMaterial map={texture} />
     </mesh>
@@ -31,6 +31,7 @@ function Card({ onClick, data, ...props }) {
   let time = 0 + Math.random() * 3;
 
 
+
   useFrame(() => {
     if (cardRef.current) {
       time += 0.008; // Control the speed of movement
@@ -41,7 +42,7 @@ function Card({ onClick, data, ...props }) {
   return (
     <group ref={cardRef} onClick={() => onClick()} {...props}>
       {/* 3D Card Model */}
-      <Model position={[0, 0, 0]} rotation={[-0.06, Math.PI / 2, Math.PI / 50]} />
+      <Model outlines={props.outlines} position={[0, 0, 0]} rotation={[-0.06, Math.PI / 2, Math.PI / 50]} />
       {/* 3D Text positioned above the card */}
       <mesh position={[-1.1, 1.5, -0.75]}>
             <planeGeometry args={[3.7   , 4.5]} /> {/* Width and height to cover both lines of text */}

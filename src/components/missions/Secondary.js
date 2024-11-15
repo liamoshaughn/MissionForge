@@ -74,6 +74,7 @@ export default function Secondary(props) {
         carousel={true}
         data={deck.secondary_missions.fixed}
         onClick={(mission) => toggleSelection(mission)}
+        selected = {selectedMissions}
         onPointerEnter={null}
         onPointerLeave={null}
         style={{ width: '100vw', height: '100%', bottom: 0, top:"auto" }}

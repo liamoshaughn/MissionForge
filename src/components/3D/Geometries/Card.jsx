@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGLTF } from '@react-three/drei'
+import { Outlines, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
 
 export function Model(props) {
@@ -9,9 +9,12 @@ export function Model(props) {
   const material = materials.Material;
   material.metalness = 1
   material.envMapIntensity = 1.5
+  
 
   return (
-      <mesh  {...props} geometry={nodes.Cube.geometry} material={material} position={[0, 0, 0]} />
+      <mesh  {...props} geometry={nodes.Cube.geometry} material={material} position={[0, 0, 0]} >
+        {props.outlines && <Outlines color="red" thickness={3}/>}
+      </mesh>
   )
 }
 
