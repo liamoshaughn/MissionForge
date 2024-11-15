@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useStore } from '../../store/store';
 import Autocomplete from '../Autocomplete';
+import CardCanvas from '../3D/Canvas';
 
 export default function GameRule() {
   const store = useStore();
@@ -13,8 +14,8 @@ export default function GameRule() {
     let missions = deck.mission_rules;
     let randNum = Math.floor(Math.random() * 12);
 
-    console.log(store)
-    
+    console.log(store);
+
     if (missions[randNum].name === 'Hidden Supplies' && store.mission.name === 'The Ritual') {
       missions = missions.filter((selected) => selected.name !== 'Hidden Supplies');
       randNum = Math.floor(Math.random() * 12);
@@ -83,17 +84,13 @@ export default function GameRule() {
       <div style={{ display: 'flex', flexWrap: 'nowrap', gap: '30px' }}>
         {rule ? (
           <>
-            {rule.map((mission, index) => (
-              <div key={index} style={{ border: '1px solid white', padding: '20px', flex: '1' }}>
-                <h3>{mission.name}</h3>
-                <div style={{ fontSize: '12px' }}>
-                  <h4>
-                    <strong>Rule</strong>
-                  </h4>
-                  <p>{mission.rule}</p>
-                </div>
-              </div>
-            ))}
+            <CardCanvas
+              data={rule}
+              onClick={() => determineRule()}
+              onPointerEnter={null}
+              onPointerLeave={null}
+              style={{ width: '50%', height: '100vh', right: '10%', left: 'auto', top: '-100px' }}
+            />
           </>
         ) : (
           <button onClick={() => determineRule()}>Draw Rule</button>

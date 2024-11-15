@@ -1,6 +1,7 @@
 import { useStore } from '../../store/store';
 import { useEffect, useState } from 'react';
 import MissionCard from '../MissionCard';
+import CardCanvas from '../3D/Canvas';
 
 export default function Secondary(props) {
   const store = useStore();
@@ -69,11 +70,14 @@ export default function Secondary(props) {
         {selectedMissions.length === 2 && <button onClick={handleNext}>Next</button>}
       </div>
       {type === 'fixed' && (
-        <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-          {deck.secondary_missions.fixed.map((mission, index) => (
-             <MissionCard toggleSelection={()=>toggleSelection(mission)} selectedMissions={selectedMissions} mission={mission} key={index}/>
-          ))}
-        </div>
+        <CardCanvas
+        carousel={true}
+        data={deck.secondary_missions.fixed}
+        onClick={(mission) => toggleSelection(mission)}
+        onPointerEnter={null}
+        onPointerLeave={null}
+        style={{ width: '100vw', height: '100%', bottom: 0, top:"auto" }}
+      />
       )}
       {type === 'tactical' && (
         <div style={{ display: 'flex', gap: '20px', flexDirection:"column" }}>

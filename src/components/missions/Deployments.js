@@ -1,4 +1,5 @@
 import { useStore } from '../../store/store';
+import CardCanvas from '../3D/Canvas';
 import Autocomplete from '../Autocomplete';
 
 export default function Deployments() {
@@ -19,10 +20,10 @@ export default function Deployments() {
         <h2>Deployments</h2>
         <Autocomplete data={deck.deployments} select={(deployment) => store.setDeployment(deployment) } />
         {deployment ? (
-            <div style={{ border: '1px solid white', padding:"20px", maxWidth:"65vw" }}>
-            <h3>{deployment.name}</h3>
-                <img style={{width:"100%"}} alt={`The Chosen Deployment Zone - ${deployment.name}`} src={deployment.image}/>
-            </div>
+            <CardCanvas
+            data={[deployment]}
+            style={{width:"700px", height: "100%", right:"10%", left:"auto", top:"-100px"}}
+          />
         ) : <button onClick={()=>determineDeployment()}>Draw deployment</button>}
         </div>
     );
