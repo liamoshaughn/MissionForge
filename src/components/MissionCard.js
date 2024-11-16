@@ -10,7 +10,7 @@ export default function MissionCard(props) {
     <div
       onClick={handleClick}
       style={{
-        flex: '1',
+        flex: '0.9',
         padding: '10px',
         minWidth: '200px',
         position: 'relative',

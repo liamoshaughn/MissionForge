@@ -32,7 +32,6 @@ export default function Battle() {
     store.setDeck(deck.sort(() => Math.random() - 0.5));
   };
 
-  console.log(store);
 
   const handleNext = () => {
     if (turn === 2) {
@@ -89,7 +88,7 @@ export default function Battle() {
   }, [endGame]);
 
   return (
-    <div style={{ width: '100vw', height: 'fit-content' }}>
+    <div style={{ width: '100vw', height: 'fit-content', paddingLeft:'5vw', paddingBottom:'4vh', background:'#282c34'}}>
       {endGame ? (
         <>
           {gambit && gambit.name !== 'Proceed as Planned' && gambitSuccess === null ? (
@@ -271,7 +270,7 @@ export default function Battle() {
                             <div
                               onClick={() => handleMissionClick()}
                               key={index}
-                              style={{ border: '1px solid white', padding: '20px', flex: '1' }}
+                              style={{ border: '1px solid white', padding: '20px', maxWidth:'300px' }}
                             >
                               {mission.name === 'Adapt or Die' && (
                                 <div>

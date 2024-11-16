@@ -66,7 +66,7 @@ export default function Secondary(props) {
       <h2>Secondary Missions</h2>
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <button onClick={() => handleClick('fixed')}>Fixed</button>
-        <button onClick={() => handleClick('tactical')}>Tactical</button>
+        <button style={{zIndex:"2"}} onClick={() => handleClick('tactical')}>Tactical</button>
         {selectedMissions.length === 2 && <button style={{position:'absolute', zIndex:2, bottom: "10vh", left:'50vw', transform: 'translate(-50%, -50%)',}} onClick={handleNext}>Next</button>}
       </div>
       {type === 'fixed' && (
