@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, {  useRef } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Environment, OrbitControls, Outlines, PerspectiveCamera } from '@react-three/drei';
+import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import Card from './Card';
 import { useSpring, a } from '@react-spring/three';
 import { useGesture } from '@use-gesture/react';

@@ -1,9 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import formats from '../components/data/formats.json';
 import { useStore } from '../store/store';
-import { Canvas } from '@react-three/fiber';
-import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import Card from './3D/Card';
 import CardCanvas from './3D/Canvas';
 
 export default function Format(props) {

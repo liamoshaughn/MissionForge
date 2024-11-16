@@ -5,7 +5,6 @@ import CardCanvas from '../3D/Canvas';
 export default function Primary() {
   const store = useStore();
   const deck = useStore((state) => state.gamemode);
-  const turn = useStore((state) => state.turn);
   const mission = useStore((state) => state.mission);
   const determineMission = () => {
     const randNum = Math.floor(Math.random() * 9);

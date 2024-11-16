@@ -1,6 +1,5 @@
 import { useStore } from '../../store/store';
 import { useEffect, useState } from 'react';
-import MissionCard from '../MissionCard';
 import CardCanvas from '../3D/Canvas';
 
 export default function Secondary(props) {

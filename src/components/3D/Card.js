@@ -1,5 +1,5 @@
 import { Model } from './Geometries/Card';
-import { Text, useTexture } from '@react-three/drei';
+import { Text } from '@react-three/drei';
 import { useFrame, useLoader } from '@react-three/fiber';
 import { useRef } from 'react';
 import { TextureLoader, ClampToEdgeWrapping } from 'three';

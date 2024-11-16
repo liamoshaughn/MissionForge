@@ -1,6 +1,5 @@
 import React from 'react'
 import { Outlines, useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/models/card.glb')
