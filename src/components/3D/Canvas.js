@@ -1,32 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Environment, OrbitControls, Outlines, PerspectiveCamera } from '@react-three/drei';
 import Card from './Card';
 import { useSpring, a } from '@react-spring/three';
 import { useGesture } from '@use-gesture/react';
+import { clamp } from 'three/src/math/MathUtils.js';
 
 function CardContainer({ data, onClick, onPointerEnter, onPointerLeave, selected }) {
   const { size, viewport } = useThree();
   const aspect = size.width / viewport.width;
+
+  const cardWidth = 1; // Adjust based on your card size
+  const gap = 2.9; // Space between cards
+  const totalWidth = data.length * (cardWidth + gap);
+
+
+  console.log(totalWidth)
+
+
   const [spring, set] = useSpring(() => ({
     scale: [1, 1, 1],
     position: [0, 0, 0],
     rotation: [0, 0, 0],
-    config: { friction: 50 },
+    config: { friction: 40 },
   }));
+  
+  // Keep track of current position manually
+  const previousPositionRef = useRef(0);
+  
   const bind = useGesture({
-    onDrag: ({ offset: [x, y] }) => set({ position: [(x * 2) / aspect, 0, 0] }),
+    onDrag: ({ movement: [x], last }) => {
+      let adjustedX = previousPositionRef.current + (x * 2) / aspect;
+  
+      // Apply rubber-banding effect if out of bounds
+      if (adjustedX > 0) {
+        adjustedX = adjustedX / (1 + adjustedX / 10);
+      } else if (adjustedX < -totalWidth) {
+        adjustedX = -totalWidth + (adjustedX + totalWidth) / (1 - (adjustedX + totalWidth) / 10); // Scale down beyond left bound
+      }
+  
+      set({ position: [adjustedX, 0, 0] });
+  
+      if (last) {
+        const snappedX = clamp(adjustedX, -totalWidth, 0); 
+        set({ position: [snappedX, 0, 0] });
+        previousPositionRef.current = snappedX
+        
+      }
+    },
   });
+  
 
-
-
-
-
+  
   return (
     <>
       <a.group {...spring} {...bind()} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
         {data.map((cardData, index) => {
-          const cardPositionX = index * 5;
+          const cardPositionX = index * 4.5;
           const outline = selected.filter((selected) => selected === cardData).length>=1 ? true : false
 
           return (
@@ -58,7 +88,8 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
       }}
     >
       <Canvas dpr={[1, 2]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
-        <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={75} near={0.1} far={1000} />
+        <PerspectiveCamera makeDefault position={[0, 0, carousel ? 6 : 6+6*(data.length-1)]} fov={75} near={0.1} far={1000} />
+        
         <Environment preset="park" />
         {carousel ? (
           <CardContainer
@@ -69,10 +100,14 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
             onPointerLeave={onPointerLeave}
           />
         ) : (
-          data.map((cardData, index) => {
+        <>
+        <OrbitControls/>
+        {data.map((cardData, index) => {
+            const zPos = -10*(data.length-1)
+            console.log(zPos)
             const xPos = (index - (data.length - 1.45) / 2) * 4.5; // Center cards based on data length
             return (
-              <group position={[xPos + 0.06, -2, 0]}>
+              <group position={[xPos + 0.06, -2, 0 ]}>
                 <Card
                   key={index}
                   data={cardData}
@@ -85,7 +120,10 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
                 />
               </group>
             );
-          })
+          })}
+        
+        </>
+          
         )}
       </Canvas>
     </div>

@@ -67,7 +67,7 @@ export default function Secondary(props) {
       <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
         <button onClick={() => handleClick('fixed')}>Fixed</button>
         <button onClick={() => handleClick('tactical')}>Tactical</button>
-        {selectedMissions.length === 2 && <button onClick={handleNext}>Next</button>}
+        {selectedMissions.length === 2 && <button style={{position:'absolute', zIndex:2, bottom: "10vh", left:'50vw', transform: 'translate(-50%, -50%)',}} onClick={handleNext}>Next</button>}
       </div>
       {type === 'fixed' && (
         <CardCanvas
