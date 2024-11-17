@@ -6,6 +6,7 @@ import { useSpring, a } from '@react-spring/three';
 import { useGesture } from '@use-gesture/react';
 import { clamp } from 'three/src/math/MathUtils.js';
 
+
 function CardContainer({ data, onClick, onPointerEnter, onPointerLeave, selected }) {
   const { size, viewport } = useThree();
   const aspect = size.width / viewport.width;
@@ -54,6 +55,7 @@ function CardContainer({ data, onClick, onPointerEnter, onPointerLeave, selected
   
   return (
     <>
+    
       <a.group {...spring} {...bind()} onPointerEnter={onPointerEnter} onPointerLeave={onPointerLeave}>
         {data.map((cardData, index) => {
           const cardPositionX = index * 4.5;
@@ -76,6 +78,8 @@ function CardContainer({ data, onClick, onPointerEnter, onPointerLeave, selected
 }
 
 export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLeave, style, carousel, selected }) {
+
+    
   return (
     <div
       style={{
@@ -90,7 +94,7 @@ export default function CardCanvas({ data, onClick, onPointerEnter, onPointerLea
       <Canvas dpr={[1, 2]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
         <PerspectiveCamera makeDefault position={[0, 0, carousel ? 6 : 6+6*(data.length-1)]} fov={75} near={0.1} far={1000} />
         
-        <Environment preset="park" />
+        <Environment files="belfast.hdr" environmentIntensity={0.3}/>
         {carousel ? (
           <CardContainer
             selected = {selected}
